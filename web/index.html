@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f7f9fd">
+  <title>Scan Studio</title>
+  <meta name="description" content="Tự căn bốn góc, làm rõ ảnh và nhận dạng chữ Việt/Anh ngay trên máy của bạn.">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/app.css">
+  <script src="/app.js" defer></script>
+</head>
+<body>
+  <svg class="svg-defs" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+    <symbol id="i-scan" viewBox="0 0 24 24"><path d="M4 8V5a1 1 0 0 1 1-1h3M16 4h3a1 1 0 0 1 1 1v3M20 16v3a1 1 0 0 1-1 1h-3M8 20H5a1 1 0 0 1-1-1v-3M4 12h16M8 9h8M8 15h8"/></symbol>
+    <symbol id="i-upload" viewBox="0 0 24 24"><path d="M12 16V4m0 0-4 4m4-4 4 4M4 15v4a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-4"/></symbol>
+    <symbol id="i-spark" viewBox="0 0 24 24"><path d="m12 2 1.6 6.4L20 10l-6.4 1.6L12 18l-1.6-6.4L4 10l6.4-1.6L12 2ZM19 17l.5 1.5L21 19l-1.5.5L19 21l-.5-1.5L17 19l1.5-.5L19 17Z"/></symbol>
+    <symbol id="i-download" viewBox="0 0 24 24"><path d="M12 3v12m0 0-4-4m4 4 4-4M4 17v3h16v-3"/></symbol>
+    <symbol id="i-copy" viewBox="0 0 24 24"><rect x="8" y="8" width="12" height="12" rx="2"/><path d="M16 8V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h2"/></symbol>
+    <symbol id="i-moon" viewBox="0 0 24 24"><path d="M20 15.5A8 8 0 0 1 8.5 4 8 8 0 1 0 20 15.5Z"/></symbol>
+    <symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M4.9 4.9l1.4 1.4m11.4 11.4 1.4 1.4M2 12h2m16 0h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></symbol>
+    <symbol id="i-reset" viewBox="0 0 24 24"><path d="M3 11a9 9 0 1 1 2.6 6.4M3 16v-5h5"/></symbol>
+    <symbol id="i-image" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m4 18 5-5 3 3 4-5 4 6"/></symbol>
+    <symbol id="i-text" viewBox="0 0 24 24"><path d="M4 6h16M4 11h16M4 16h12M4 21h8"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><path d="m4 12 5 5L20 6"/></symbol>
+    <symbol id="i-close" viewBox="0 0 24 24"><path d="M5 5 19 19M19 5 5 19"/></symbol>
+    <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+    <symbol id="i-minus" viewBox="0 0 24 24"><path d="M5 12h14"/></symbol>
+  </svg>
+
+  <div class="app-shell">
+    <header class="topbar">
+      <a class="brand" href="/" aria-label="Scan Studio, về đầu trang">
+        <span class="brand-mark"><img src="/favicon.svg" alt="" width="34" height="34"></span>
+        <strong>Scan Studio</strong>
+      </a>
+      <div class="top-actions">
+        <button id="themeBtn" class="icon-button" type="button" aria-label="Đổi giao diện sáng hoặc tối" title="Đổi giao diện"><svg><use href="#i-moon"/></svg></button>
+        <button id="resetBtn" class="icon-button" type="button" aria-label="Bắt đầu lại" title="Bắt đầu lại"><svg><use href="#i-reset"/></svg></button>
+      </div>
+    </header>
+
+    <main>
+      <section class="intro">
+        <div class="intro-copy">
+          <h1>Từ ảnh chụp <em>thành tài liệu rõ nét.</em></h1>
+        </div>
+      </section>
+
+      <nav class="steps" aria-label="Tiến độ quét tài liệu">
+        <div class="step active" data-step="0"><span class="step-number">01</span><span><strong>Chọn ảnh</strong><small>JPG hoặc PNG</small></span></div>
+        <div class="step" data-step="1"><span class="step-number">02</span><span><strong>Tự căn và quét</strong><small>Tìm bốn góc trang</small></span></div>
+        <div class="step" data-step="2"><span class="step-number">03</span><span><strong>Nhận dạng chữ</strong><small>Việt và Anh</small></span></div>
+        <div class="step" data-step="3"><span class="step-number">04</span><span><strong>Xuất kết quả</strong><small>Ảnh và văn bản</small></span></div>
+      </nav>
+
+      <div class="workspace">
+        <section class="pane image-pane" aria-labelledby="sourceTitle">
+          <div class="pane-head"><div><span class="pane-kicker">NGUỒN</span><h2 id="sourceTitle">Ảnh gốc</h2></div><span id="sourceSize" class="meta-pill">Chưa có ảnh</span></div>
+          <div id="dropzone" class="dropzone" role="region" aria-label="Vùng kéo thả ảnh tài liệu">
+            <div id="sourceEmpty" class="empty-state">
+              <div class="empty-illustration"><span class="ghost-paper paper-back"></span><span class="ghost-paper paper-front"><i></i><i></i><i></i></span><span class="empty-plus"><svg><use href="#i-plus"/></svg></span></div>
+              <h3>Ảnh tài liệu của bạn bắt đầu ở đây</h3>
+              <p>Kéo thả tệp vào vùng này hoặc chọn từ máy tính.</p>
+              <button id="pickBtn" class="button button-primary" type="button"><svg><use href="#i-upload"/></svg> Chọn ảnh tài liệu</button>
+              <span class="drop-hint">JPG, PNG · Tối đa 25 MB</span>
+            </div>
+            <div id="sourceViewer" class="viewer hidden">
+              <div class="image-frame"><img id="sourceImage" alt="Ảnh tài liệu gốc"><svg id="cornerOverlay" class="corner-overlay" aria-hidden="true"></svg></div>
+            </div>
+          </div>
+          <div class="pane-foot"><span id="sourceName" class="filename">Chưa chọn tệp</span><button id="replaceBtn" class="text-button hidden" type="button">Đổi ảnh</button></div>
+        </section>
+
+        <section class="pane image-pane" aria-labelledby="resultTitle">
+          <div class="pane-head"><div><span class="pane-kicker">KẾT QUẢ</span><h2 id="resultTitle">Bản quét</h2></div><div class="zoom-controls"><button id="zoomOut" class="mini-button" type="button" aria-label="Thu nhỏ bản quét" disabled><svg><use href="#i-minus"/></svg></button><span id="zoomLabel">100%</span><button id="zoomIn" class="mini-button" type="button" aria-label="Phóng to bản quét" disabled><svg><use href="#i-plus"/></svg></button></div></div>
+          <div id="resultViewer" class="result-viewer">
+            <div id="resultEmpty" class="empty-state result-empty"><div class="result-icon"><svg><use href="#i-scan"/></svg></div><h3>Bản quét sẽ xuất hiện ở đây</h3><p>Chọn ảnh rồi nhấn <strong>Tự căn và quét</strong> để bắt đầu.</p></div>
+            <img id="resultImage" class="result-image hidden" alt="Ảnh tài liệu sau khi quét">
+            <div id="scanSweep" class="scan-sweep hidden" aria-hidden="true"></div>
+          </div>
+          <div class="pane-foot"><span id="resultMeta" class="result-meta">Sẵn sàng xử lý</span><button id="downloadImageBtn" class="text-button" type="button" disabled><svg><use href="#i-download"/></svg> Tải ảnh PNG</button></div>
+        </section>
+
+        <aside class="pane control-pane" aria-labelledby="controlTitle">
+          <div class="pane-head"><div><span class="pane-kicker">STUDIO</span><h2 id="controlTitle">Bảng điều khiển</h2></div><span class="control-dot"></span></div>
+          <div class="control-body">
+            <div class="control-section"><div class="section-title"><span class="section-index">01</span><div><strong>Chế độ ảnh</strong><small>Chọn cách hiển thị bản quét</small></div></div>
+              <div class="mode-grid" role="group" aria-label="Chế độ ảnh"><button class="mode-button selected" type="button" data-mode="color" aria-pressed="true"><span class="mode-preview mode-color"></span>Màu</button><button class="mode-button" type="button" data-mode="gray" aria-pressed="false"><span class="mode-preview mode-gray"></span>Xám</button><button class="mode-button" type="button" data-mode="bw" aria-pressed="false"><span class="mode-preview mode-bw"></span>Đen trắng</button></div>
+              <button id="scanBtn" class="button button-primary button-wide" type="button" disabled><svg><use href="#i-spark"/></svg> Tự căn và quét <span class="button-arrow">→</span></button>
+              <button id="manualBtn" class="subtle-button" type="button" disabled>Chỉnh bốn góc nếu cần</button>
+              <div id="manualHint" class="manual-hint hidden"><span>Nhấp lần lượt bốn góc trên ảnh gốc.</span><button id="clearCornersBtn" type="button">Chọn lại</button></div>
+            </div>
+            <div class="control-section ocr-section"><div class="section-title"><span class="section-index">02</span><div><strong>Nhận dạng chữ</strong><small>Đọc nội dung trong bản quét</small></div></div>
+              <label class="field-label" for="language">Ngôn ngữ</label>
+              <select id="language"><option value="vie+eng">Tiếng Việt và tiếng Anh</option><option value="vie">Tiếng Việt</option><option value="eng">Tiếng Anh</option></select>
+              <button id="ocrBtn" class="button button-secondary button-wide" type="button" disabled><svg><use href="#i-text"/></svg> Nhận dạng chữ</button>
+              <div class="text-top"><label for="ocrText">Văn bản nhận dạng</label><span id="ocrTime"></span></div>
+              <textarea id="ocrText" placeholder="Văn bản sẽ xuất hiện ở đây sau khi nhận dạng…" spellcheck="false"></textarea>
+              <div class="text-actions"><button id="copyBtn" class="utility-button" type="button" disabled><svg><use href="#i-copy"/></svg> Sao chép</button><button id="downloadTextBtn" class="utility-button" type="button" disabled><svg><use href="#i-download"/></svg> Tải TXT</button></div>
+            </div>
+          </div>
+        </aside>
+      </div>
+      <div class="status-line"><span class="status-indicator"></span><span id="statusText" role="status" aria-live="polite">Sẵn sàng. Chọn một ảnh tài liệu để bắt đầu.</span></div>
+    </main>
+  </div>
+  <input id="fileInput" type="file" accept="image/jpeg,image/png,.jpg,.jpeg,.png" class="visually-hidden">
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+</body>
+</html>

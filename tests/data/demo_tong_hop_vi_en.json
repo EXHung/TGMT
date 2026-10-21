@@ -1,0 +1,28 @@
+{
+  "source": "synthetic",
+  "corners": [
+    [
+      170.0,
+      80.0
+    ],
+    [
+      1110.0,
+      160.0
+    ],
+    [
+      1180.0,
+      1010.0
+    ],
+    [
+      95.0,
+      1050.0
+    ]
+  ],
+  "text": [
+    "TÀI LIỆU MẪU",
+    "Đồ án Thị giác máy tính",
+    "Ứng dụng quét tài liệu và nhận dạng chữ.",
+    "This is a synthetic document scan test.",
+    "Ngày 26 tháng 9 năm 2026"
+  ]
+}

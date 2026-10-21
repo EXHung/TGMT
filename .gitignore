@@ -1,0 +1,12 @@
+.venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+images/input/*
+!images/input/demo_tong_hop_vi_en.png
+images/output/
+images/debug/
+tools/tesseract/
+*.log
+.DS_Store

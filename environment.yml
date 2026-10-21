@@ -1,0 +1,12 @@
+name: tgmt-scanner
+channels:
+  - conda-forge
+dependencies:
+  - python=3.11
+  - numpy
+  - opencv
+  - pillow
+  - matplotlib
+  - spyder
+  - pytesseract
+  - tesseract
